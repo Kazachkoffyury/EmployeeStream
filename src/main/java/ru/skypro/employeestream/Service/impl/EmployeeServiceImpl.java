@@ -1,5 +1,6 @@
 package ru.skypro.employeestream.Service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import ru.skypro.employeestream.Data.Employee;
 import ru.skypro.employeestream.Service.EmployeeService;
@@ -24,8 +25,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         if(!employees.containsKey(getKeyString(firstName,lastName))) {
             Employee employee = new Employee(firstName,lastName,department,salary);
-            employees.put(employee.getFullName(),employee);
-            return employee;
+            if(StringUtils.isAlpha(employee.getFullName())) {
+                employee.setFirstName(StringUtils.capitalize(firstName));
+                employee.setLastName(StringUtils.capitalize(lastName));
+                employees.put(employee.getFullName(), employee);
+                return employee;
+            }
+            throw  new EmployeeNotFound();
         }
 
         throw new DuplicateEmployee();
