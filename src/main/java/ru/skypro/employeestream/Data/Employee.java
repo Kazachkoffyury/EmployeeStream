@@ -3,8 +3,8 @@ package ru.skypro.employeestream.Data;
 import java.util.Objects;
 
 public class Employee {
-    private final String firstName;
-    private final String lastName;
+    private  String firstName;
+    private  String lastName;
     private int department;
     private int salary;
 
@@ -43,6 +43,14 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public void setFirstName(String firstName){
+        this.firstName= firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName= lastName;
     }
 
     @Override
