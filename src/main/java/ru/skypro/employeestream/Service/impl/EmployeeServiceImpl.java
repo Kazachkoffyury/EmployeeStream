@@ -29,14 +29,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         else throw new WrongEmployeeNameException();
 
         if(!employees.containsKey(getKeyString(firstName,lastName))) {
-            Employee employee = new Employee(firstName,lastName,department,salary);
-            employee.setFirstName(StringUtils.capitalize(firstName));
-            employee.setLastName(StringUtils.capitalize(lastName));
+            Employee employee = new Employee(StringUtils.capitalize(firstName),StringUtils.capitalize(lastName),department,salary);
             employees.put(employee.getFullName(), employee);
             return employee;
         }
 
-        throw new DuplicateEmployee();
+        else throw new DuplicateEmployee();
     }
 
 
@@ -53,10 +51,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployee(String firstName, String lastName) {
-        if (isNumberString(firstName) && isNumberString(lastName)) {
+        if (employees.containsKey(getKeyString(firstName,lastName))) {
             return  employees.get(getKeyString(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName)));
         }
-        throw  new WrongEmployeeNameException();
+        throw  new EmployeeNotFound();
 
     }
 
@@ -66,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private String getKeyString(String firstName, String lastName) {
-        return  firstName+" "+lastName;
+        return  StringUtils.capitalize(firstName)+" "+StringUtils.capitalize(lastName);
     }
 
     public boolean isNumberString(String str) {
