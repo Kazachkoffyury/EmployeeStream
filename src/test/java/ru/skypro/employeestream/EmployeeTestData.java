@@ -11,6 +11,8 @@ public interface EmployeeTestData {
     String LASTNAME1 = "Petrov";
     Integer DEPARTMENT1 = 1;
     int SALARY1 = 30000;
-    int MINSALARY = 10000;
-    int MAXSALARY = 30000;
+    String FIRSTNAME3 = "Nicolay";
+    String LASTNAME3 = "Nicolaev";
+    int DEPARTMENT3 =2;
+    int SALARY3 = 20000;
 }
